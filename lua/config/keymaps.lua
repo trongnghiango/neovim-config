@@ -30,6 +30,26 @@ vim.keymap.set("v", "P", '"_dP')
 -- P puts text before the cursor.
 vim.keymap.set("n", "YY", "va{Vy", opts)
 
+-- Điều hướng cửa sổ - navigation window
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Focus Left Window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Focus Right Window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Focus Below Window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Focus Above Window" })
+
+
+
+-- 1. Phím tắt cho NORMAL mode (để MỞ terminal)
+vim.keymap.set("n", "<C-/>", function() require("config.utils").toggle_terminal() end, { desc = "Toggle Split Terminal" })
+
+-- 2. Phím tắt cho TERMINAL mode (để ĐÓNG terminal)
+vim.keymap.set("t", "<C-/>", "<C-\\><C-n><Cmd>lua require('config.utils').toggle_terminal()<CR>", { desc = "Close Terminal" })
+
+-- Dùng cho Terminal-Insert mode
+-- Thoát ra Normal mode, rồi thực hiện lệnh điều hướng
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Navigate Up from Terminal" })
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Navigate Down from Terminal" })
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Navigate Left from Terminal" })
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Navigate Right from Terminal" })
 
 -- Exit on jj and jk
 vim.keymap.set("i", "kj", "<ESC>", opts)

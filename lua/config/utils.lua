@@ -54,4 +54,22 @@ M.copyFilePathAndLineNumber = function()
   end
 end
 
+-- Trong file config/utils.lua, hãy chắc chắn bạn có hàm này
+M.toggle_terminal = function()
+  local term_win = nil
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(win), 'buftype') == 'terminal' then
+      term_win = win
+      break
+    end
+  end
+
+  if term_win then
+    vim.api.nvim_win_close(term_win, true)
+  else
+    vim.cmd('split | terminal')
+    vim.cmd('startinsert')
+  end
+end
+
 return M
